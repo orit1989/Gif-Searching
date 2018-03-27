@@ -1,1 +1,1 @@
-# Gif-Searching
+# GifTastic
