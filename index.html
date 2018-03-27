@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Favorite Movies</title>
+    <style type="text/css">
+        button,
+        div,
+        form,
+        input {
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Dance Style Search</h1>
+
+      
+        <div id="dances-view"></div>
+
+        <form id="dance-form">
+            <label for="dance-input">Add a Dance</label>
+            <input type="text" id="dance-input">
+            <br>
+
+        
+            <input id="add-dance" type="submit" value="Add a Dance">
+        </form>
+
+        <div id="gifs-appear-here">
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript">
+          
+            var dances = ["Hip Hop Dancing", "Salsa Dancing", "Tango", "Ballet"];
+
+
+            function renderButtons() {
+
+                $("#dances-view").empty();
+
+           
+                for (var i = 0; i < dances.length; i++) {
+
+                
+                    var a = $("<button>");
+                
+                    a.addClass("dance");
+                   
+                    a.attr("data-dance", dances[i]);
+                    
+                    a.text(dances[i]);
+                  
+                    $("#dances-view").append(a);
+                }
+            };
+
+            
+            $("#add-dance").on("click", function (event) {
+             
+                event.preventDefault();
+                
+                var dance = $("#dance-input").val().trim();
+             
+                dances.push(dance);
+
+                console.log(dance);
+
+            
+                renderButtons();
+            });
+
+
+            renderButtons();
+
+             $(".dance").on("click", function() {
+
+                 $("#gifs-appear-here").empty();
+
+                 
+    
+      
+      var dance2 = $(this).attr("data-dance");
+
+      
+
+
+      var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+        dance2 + "&api_key=CkqaY7Ki8HSszfuoC1ThzAebps3k7AQ0&limit=10";
+
+     
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).then(function(response) {
+
+          var results = response.data;
+          console.log(response);
+
+
+          for (var i = 0; i < results.length; i++) {
+
+       
+            if (true) {
+   
+              var gifDiv = $("<div class='item'>");
+
+  
+              var rating = results[i].rating;
+
+           
+              var p = $("<p>").text("Rating: " + rating);
+
+        
+              var danceImage = $("<img>");
+
+              danceImage.attr("src", results[i].images.fixed_height.url);
+
+             
+              gifDiv.append(p);
+              gifDiv.append(danceImage);
+
+            
+              $("#gifs-appear-here").prepend(gifDiv);
+              
+            }
+          }
+          
+        });
+        
+    });
+    
+        </script>
+    </div>
+</body>
+
+</html>
