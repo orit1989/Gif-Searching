@@ -3,151 +3,50 @@
 
 <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
     <title>Dancing Styles Gifs</title>
-    <style type="text/css">
-        button,
-        div,
-        form,
-        input {
-            margin: 10px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body>
 
+    <div class="page-header">
+        <h1 class="col-md-6 col-md-offset-3 text-center">Lets Boogy Dance!</h1>
+    </div>
+
+
     <div class="container">
-        <h1>Dance Style Search</h1>
 
-
-        <div id="dances-view"></div>
-
-        <form id="dance-form">
-            <label for="dance-input">Add a Dance</label>
-            <input type="text" id="dance-input">
-            <br>
-            <input id="add-dance" type="submit" value="Add a Dance">
-        </form>
-
-        <div id="gifs-appear-here">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button id="add-dance" class="btn btn-default" type="submit" value="Add a Dance">Go!</button>
+                    </span>
+                    <input id="dance-input" type="text" class="form-control" placeholder="Search for...">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-3">
+                <div id="dances-view"></div>
+            </div>
         </div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script type="text/javascript">
-            var dances = ["Hip Hop Dancing", "Salsa Dancing", "Tango", "Ballet"];
-
-            $(document).on('click', '.dance', function () {
-                $("#gifs-appear-here").empty();
-
-
-                var dance2 = $(this).attr("data-dance");
-
-
-                var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-                    dance2 + "&api_key=CkqaY7Ki8HSszfuoC1ThzAebps3k7AQ0&limit=10";
-
-
-                $.ajax({
-                    url: queryURL,
-                    method: "GET"
-                }).then(function (response) {
-
-                    var results = response.data;
-                    console.log(response);
-
-
-                    for (var i = 0; i < results.length; i++) {
-
-
-                        if (true) {
-
-                            var gifDiv = $("<div class='item'>");
-
-
-                            var rating = results[i].rating;
-
-
-                            var p = $("<p>").text("Rating: " + rating);
-
-
-                            var danceImage = $("<img>");
-
-                            danceImage.attr("src", results[i].images.fixed_height_still.url);
-
-
-                            danceImage.attr('data-still', results[i].images.fixed_height_still.url);
-                            danceImage.attr('data-animate', results[i].images.fixed_height.url);
-                            danceImage.attr('data-state','still');
-
-                            // danceImage.attr("data-state");
-
-                            // danceImage.addClass("gif");
-
-                            gifDiv.append(p);
-                            gifDiv.append(danceImage);
-
-
-                            $("#gifs-appear-here").prepend(gifDiv);
-
-                        }
-                    }
-
-                });
-            })
-
-
-            function renderButtons() {
-
-                $("#dances-view").empty();
-
-
-                for (var i = 0; i < dances.length; i++) {
-
-
-                    var a = $("<button>");
-
-                    a.addClass("dance");
-
-                    a.attr("data-dance", dances[i]);
-
-                    a.text(dances[i]);
-
-                    $("#dances-view").append(a);
-                }
-            };
-
-
-            $("#add-dance").on("click", function (event) {
-
-                event.preventDefault();
-
-                var dance = $("#dance-input").val().trim();
-
-                dances.push(dance);
-
-                console.log(dance);
-
-
-                renderButtons();
-            });
-
-
-            $(document).on('click', 'img', function () {
-
-
-                if ($(this).attr('data-state') == 'still') {
-                    $(this).attr('src', $(this).attr('data-animate'));
-                    $(this).attr('data-state', 'animate');
-                } else {
-                    $(this).attr('src', $(this).attr('data-still'));
-                    $(this).attr('data-state', 'still');
-                }
-            });
-
-
-            renderButtons();
-        </script>
     </div>
+
+    <div id="container-fluid">
+        <div id="row">
+            <div class="col-md-12">
+                <div id="gifs-appear-here"></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="assets/javascript/app.js">
+    </script>
 </body>
 
 </html>

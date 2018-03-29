@@ -1,0 +1,31 @@
+button,
+div,
+form,
+input {
+    margin: 10px;
+}
+
+.page-header {
+    border-bottom: none;
+}
+
+body {
+    background: url("https://i1.wallbox.ru/wallpapers/main/201437/a0de2005f95c1fa.jpg");
+    font-family: cursive;
+    font-size: 15px;
+}
+
+h1 {
+    color: white;
+    font-family: cursive;
+    font-size: 75px;
+}
+
+.dance {
+    padding: 5px;
+    border: 1px solid black;
+}
+
+p {
+    color: white;
+}
