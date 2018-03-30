@@ -10,8 +10,8 @@ input {
 }
 
 body {
-    background: url("https://i1.wallbox.ru/wallpapers/main/201437/a0de2005f95c1fa.jpg");
-    font-family: cursive;
+    background: url("../images/dance4.jpg");
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 15px;
 }
 
@@ -28,4 +28,10 @@ h1 {
 
 p {
     color: white;
+    font-size: 20px;
 }
+ .item {
+     float: left;
+ }
+
+ 
